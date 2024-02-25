@@ -6,11 +6,23 @@ We are creating the infrastructure to enable managed certificate based SSH login
 
 ## Why do we need certificate based SSH logins?
 
-Put simply, security and ease of management. Simple usernames and passwords are easy to work with and is what most of us daily drive for SSH. However, this is problematic when
-1. The number of hosts is more than one. In this case we need to use a password manager (not a bad idea tbh) or reuse the same username/password combo (a very bad idea!).
+This is best explained by an analogy. 
+Lets assume you want to travel to a country. How would you prove who you are to the border officer? 
+
+You could have a 'secret' that only you know and was agreed with the officer before hand. That way the officer knows who you are and alls good right? 
+Yeah, no. What if someone else was evesdropping on the secret and uses it with the officer? The officer has no choice but to let that person in under your name, and if that person does something illegal, you are on the hook for it. 
+What if someone tries to guess it ? given enough tries, they could be successful ( or if they know your mothers maiden name ). 
+What if the you write it down to not forget the secret and someone else sees it? 
+Finally, it might work if you are one person, but the officer needs to handle thousands of travellers every day. Would he agree on secrets with all of them ?
+
+This simple ( and a bit strained ) example is unfortunately one that most of us use in SSH. We set a username and password and use that to authenticate with the host. Password auth is not scalable to multi user, multi host setups. 
+Password auth also suffers from the problem that it relies on the users keeping the passwords secure to verify both identity and authorization. 
+
+Simple usernames and passwords are easy to work with and is what most of us daily drive for SSH. However, this is problematic when
+1. The number of hosts is more than one. In this case we need to use a password manager or reuse the same username/password combo (a very bad idea!).
 2. If you have more than one person managing the hosts. In this case, we could again use a shared password manager or reuse the same account (another bad idea).
 
-So, we need a shared password manager then? 
+So, we need a shared password manager with complex random passwords then? 
 
 Not so fast. Lets assume we need to revoke someone's access. If they have been using a password maanger, they could theoreticaly just have dumped the plaintext password and use it without issues.
 Ofcourse, sharing a password is absoltely a bad idea too! ( which is what a shared password manager is, albeit with some extra steps )
